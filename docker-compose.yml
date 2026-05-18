@@ -1,0 +1,99 @@
+# ─────────────────────────────────────────────────────────────
+#  docker-compose.yml — Spotify Medallion (couche Gold + API + Dashboard)
+#
+#  Prerequis : Marcel-Jan/docker-hadoop-spark doit tourner.
+#  Ce fichier ajoute UNIQUEMENT :
+#    - MySQL 8       (couche Gold — datamarts)
+#    - Flask API     (JWT + Swagger)
+#    - Streamlit     (Dashboard)
+#
+#  Reseau : se connecte au reseau de Marcel-Jan (docker-hadoop-spark_default)
+#  pour que spark-master puisse joindre MySQL via JDBC.
+#
+#  Usage :
+#    1. cd docker-hadoop-spark && docker-compose up -d
+#    2. cd spotify-medallion  && docker-compose up -d
+#    3. bash setup_env.sh
+#    4. bash run_pipeline.sh
+# ─────────────────────────────────────────────────────────────
+
+networks:
+  # Reseau interne pour API <-> MySQL <-> Dashboard
+  spotify:
+    name: spotify
+    driver: bridge
+  # Reseau de Marcel-Jan — doit exister avant de lancer ce compose
+  # Nom par defaut si clone dans un dossier "docker-hadoop-spark"
+  hadoop:
+    name: docker-hadoop-spark_default
+    external: true
+
+volumes:
+  mysql_data:
+
+services:
+
+  # ── MySQL 8 — Gold (Datamarts) ──────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    networks:
+      - spotify
+      - hadoop        # spark-master peut joindre MySQL via JDBC
+    ports:
+      - "3307:3306"   # 3307 cote hote (3306 occupe par MySQL local Windows)
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: spotify_bdf
+      MYSQL_USER: spotify
+      MYSQL_PASSWORD: spotify123
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./config/init_mysql_catalogue.sql:/docker-entrypoint-initdb.d/01_catalogue.sql
+      - ./config/init_mysql_datamarts.sql:/docker-entrypoint-initdb.d/02_datamarts.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot123"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ── API Flask ───────────────────────────────────────────────
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: spotify-api
+    networks:
+      - spotify
+    ports:
+      - "8000:8000"
+    environment:
+      MYSQL_URL: mysql://root:root123@mysql:3306/spotify_bdf
+      JWT_SECRET_KEY: "spotify-super-secret-key-change-in-production"
+      JWT_EXPIRATION_MINUTES: "30"
+      FLASK_DEBUG: "false"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── Dashboard Streamlit ─────────────────────────────────────
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: spotify-dashboard
+    networks:
+      - spotify
+    ports:
+      - "8501:8501"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DB: spotify_bdf
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root123
+      API_URL: http://api:8000
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped

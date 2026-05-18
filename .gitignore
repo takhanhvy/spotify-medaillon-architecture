@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Local environments
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Generated logs
+logs/
+*.log
+
+# Large and generated data files
+data/spotify_data.csv
+data/catalogue.csv
+data/audio_features.csv
+
+# Downloaded dependency
+jars/*.jar
