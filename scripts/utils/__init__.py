@@ -1,1 +1,1 @@
-# Utils package — Spotify Medallion Pipeline
+# Utils package — Spotify Médaillon Pipeline

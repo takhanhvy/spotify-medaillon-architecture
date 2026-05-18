@@ -49,7 +49,7 @@ swagger_config = {
 }
 swagger_template = {
     "info": {
-        "title":       "Spotify Medallion API",
+        "title":       "Spotify Médaillon API",
         "description": "API REST JWT — Datamarts Spotify (Architecture Médaillon)",
         "version":     "1.0.0",
     },

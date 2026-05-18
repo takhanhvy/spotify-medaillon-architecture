@@ -22,7 +22,7 @@ import streamlit as st
 #  Configuration de la page
 # ─────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Spotify Analytics — Architecture Medaillon",
+    page_title="Spotify Analytics — Architecture Médaillon",
     page_icon="🎵",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -89,7 +89,7 @@ def load_decades() -> list:
 #  Sidebar
 # ─────────────────────────────────────────────────────────────
 st.sidebar.title("🎵 Spotify Analytics")
-st.sidebar.markdown("**Architecture Medaillon**")
+st.sidebar.markdown("**Architecture Médaillon**")
 st.sidebar.markdown("HDFS → Hive → MySQL")
 st.sidebar.divider()
 
@@ -399,4 +399,4 @@ with st.expander("📋 Donnees brutes — dm_track_popularity (100 lignes)"):
     )
     st.dataframe(df_raw, use_container_width=True, hide_index=True)
 
-st.caption("🎵 Spotify Medallion Platform — Architecture HDFS/Raw → Hive/Silver → MySQL/Gold | PySpark · Hive · Flask · Streamlit")
+st.caption("🎵 Plateforme Spotify Médaillon — Architecture HDFS/Raw → Hive/Silver → MySQL/Gold | PySpark · Hive · Flask · Streamlit")

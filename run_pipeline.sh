@@ -1,6 +1,6 @@
 #!/bin/bash
 # ─────────────────────────────────────────────────────────────
-#  run_pipeline.sh — Pipeline Spotify Medallion
+#  run_pipeline.sh — Pipeline Spotify Médaillon
 #
 #  Prerequis : bash setup_env.sh (a lancer une fois avant)
 # ─────────────────────────────────────────────────────────────
@@ -43,7 +43,7 @@ SPARK_CONF="--conf spark.hadoop.fs.defaultFS=$HDFS_NAMENODE \
 SPARK_RUN="docker exec -e PYSPARK_PYTHON=$PYTHON3 -e PYSPARK_DRIVER_PYTHON=$PYTHON3 spark-master $SPARK_SUBMIT"
 
 echo "======================================================"
-echo "  SPOTIFY MEDALLION PIPELINE"
+echo "  SPOTIFY MÉDAILLON PIPELINE"
 echo "======================================================"
 
 # ── Sync scripts -> spark-master ──────────────────────────────

@@ -1,6 +1,6 @@
 #!/bin/bash
 # ─────────────────────────────────────────────────────────────
-#  setup_env.sh — Preparation de l'environnement Spotify Medallion
+#  setup_env.sh — Preparation de l'environnement Spotify Médaillon
 #
 #  Prerequis : Marcel-Jan/docker-hadoop-spark tourne deja.
 #  Ce script :
@@ -18,7 +18,7 @@ MYSQL_JAR_URL="https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.33
 HADOOP_NETWORK="docker-hadoop-spark_default"
 
 echo "======================================================"
-echo "  SETUP ENVIRONNEMENT — Spotify Medallion"
+echo "  SETUP ENVIRONNEMENT — Spotify Médaillon"
 echo "======================================================"
 
 # ── Verification que Marcel-Jan tourne ───────────────────────

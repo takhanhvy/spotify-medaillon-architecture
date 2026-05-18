@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────
-#  docker-compose.yml — Spotify Medallion (couche Gold + API + Dashboard)
+#  docker-compose.yml — Spotify Médaillon (couche Gold + API + Dashboard)
 #
 #  Prerequis : Marcel-Jan/docker-hadoop-spark doit tourner.
 #  Ce fichier ajoute UNIQUEMENT :

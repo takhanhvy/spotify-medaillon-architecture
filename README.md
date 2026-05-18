@@ -1,6 +1,6 @@
-# Spotify Medallion
+# Spotify Médaillon
 
-Pipeline end-to-end de type Medallion pour un dataset Spotify volumineux, avec :
+Pipeline end-to-end de type Médaillon pour un dataset Spotify volumineux, avec :
 
 - ingestion et préparation des données source
 - stockage Raw sur HDFS
