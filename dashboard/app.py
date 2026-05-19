@@ -168,17 +168,17 @@ df_summary = query(
 )
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("🎶 Tracks analyses",     f"{int(df_summary['total_tracks'][0] or 0):,}")
-col2.metric("🎼 Genres selectionnes", int(df_summary['nb_genres'][0] or 0))
-col3.metric("⭐ Popularite moyenne",  f"{df_summary['avg_pop'][0] or 0}")
-col4.metric("🥁 Tempo moyen (BPM)",   f"{df_summary['avg_tempo'][0] or 0}")
+col1.metric("Tracks analyses",     f"{int(df_summary['total_tracks'][0] or 0):,}")
+col2.metric("Genres selectionnes", int(df_summary['nb_genres'][0] or 0))
+col3.metric("Popularite moyenne",  f"{df_summary['avg_pop'][0] or 0}")
+col4.metric("Tempo moyen (BPM)",   f"{df_summary['avg_tempo'][0] or 0}")
 
 st.divider()
 
 # ─────────────────────────────────────────────────────────────
 #  GRAPHIQUE 1 — Popularite par genre (Bar chart)
 # ─────────────────────────────────────────────────────────────
-st.subheader("📊 Graphique 1 — Popularite Moyenne par Genre")
+st.subheader("Graphique 1 — Popularite Moyenne par Genre")
 st.caption("Source : `dm_track_popularity`")
 
 df_pop = query(
@@ -223,7 +223,7 @@ st.divider()
 # ─────────────────────────────────────────────────────────────
 #  GRAPHIQUE 2 — Tendances genre x decennie (Line chart)
 # ─────────────────────────────────────────────────────────────
-st.subheader("📈 Graphique 2 — Tendances Audio par Genre et Decennie")
+st.subheader("Graphique 2 — Tendances Audio par Genre et Decennie")
 st.caption("Source : `dm_genre_trends`")
 
 genres_evo = selected_genres[:5]
@@ -272,7 +272,7 @@ st.divider()
 # ─────────────────────────────────────────────────────────────
 #  GRAPHIQUE 3 — Top Artistes par decennie
 # ─────────────────────────────────────────────────────────────
-st.subheader("🏆 Graphique 3 — Top Artistes par Decennie")
+st.subheader("Graphique 3 — Top Artistes par Decennie")
 st.caption("Source : `dm_top_artists` | Classe par influence_score = avg_popularity × log1p(total_tracks)")
 
 col_dec, _ = st.columns([2, 3])
@@ -330,7 +330,7 @@ st.divider()
 # ─────────────────────────────────────────────────────────────
 #  GRAPHIQUE 4 — Hits emergents
 # ─────────────────────────────────────────────────────────────
-st.subheader("🚀 Graphique 4 — Hits Emergents par Genre et Annee")
+st.subheader("Graphique 4 — Hits Emergents par Genre et Annee")
 st.caption("Source : `dm_hits_emergents` | Top 10 par genre × annee")
 
 col_g4, col_y4 = st.columns(2)
@@ -384,7 +384,7 @@ st.divider()
 # ─────────────────────────────────────────────────────────────
 #  Tableau de donnees brutes
 # ─────────────────────────────────────────────────────────────
-with st.expander("📋 Donnees brutes — dm_track_popularity (100 lignes)"):
+with st.expander("Donnees brutes — dm_track_popularity (100 lignes)"):
     df_raw = query(
         f"""
         SELECT track_id, track_name, artist_name, genre, year, popularity,
@@ -399,4 +399,5 @@ with st.expander("📋 Donnees brutes — dm_track_popularity (100 lignes)"):
     )
     st.dataframe(df_raw, use_container_width=True, hide_index=True)
 
-st.caption("🎵 Plateforme Spotify Médaillon — Architecture HDFS/Raw → Hive/Silver → MySQL/Gold | PySpark · Hive · Flask · Streamlit")
+st.caption("Efrei - Mastère Data Engineering & AI 2025-2027 | Projet de Big Data Framework")
+st.caption("Auteurs : TA Khanh Vy | MADOUNGOU Alice Colombe | AMINI Gloria")
