@@ -47,7 +47,7 @@ fi
 echo ""
 echo "[2/6] Demarrage MySQL + API + Dashboard..."
 docker-compose down --remove-orphans 2>/dev/null || true
-docker-compose up -d
+docker compose up -d --build api dashboard
 
 echo "  Attente MySQL healthy..."
 for i in $(seq 1 24); do
